@@ -19,3 +19,6 @@ jobs:
 
       - name: npm install, build
         run: make install
+        
+      - name: Run Linter
+        run: make lint
