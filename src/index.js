@@ -1,37 +1,42 @@
+
+import _ from 'lodash'
+import fs from 'fs';
 import pkg from 'lodash';
 const { has } = pkg;
-import fs from 'fs';
 
 
-const diff = (file1, file2) => {
-    const result = {};
-
+const getDiff = (file1, file2) => {
     const readData1 = fs.readFileSync(file1)
     const readData2 = fs.readFileSync(file2);
+    
+    const obj1 = JSON.parse(readData1);
+    const obj2 = JSON.parse(readData2);
 
-    const data1 = JSON.parse(readData1);
-    const data2 = JSON.parse(readData2);
-  
-    Object.keys(data2).forEach((key) => {
-      if (has(data1, key)) {
-        if (data2[key] === data1[key]) {
-          result[key] = data1[key];
+    const key1 = _.keys(obj1);
+    const key2 = _.keys(obj2);
+    const keys = _.union(key1, key2);
+    const sortedKeys = keys.sort()
+    const diffFunc = sortedKeys.reduce((acc, key) => {
+        if(has(obj1, key)) {
+          if (has(obj2, key)) {
+            if(obj1[key] !== obj2[key]) {
+              acc[`- ${key}`] = obj1[key]
+              acc[`+ ${key}`] = obj2[key]
+            } else {
+              acc[key] = obj1[key]
+            }
+          } else {
+            acc[`- ${key}`] = obj1[key]
+          }
         } else {
-          result[`- ${key}`] = data1[key];
-          result[`+ ${key}`] = data2[key];
-        }
-      } else {
-        result[`+ ${key}`] = data2[key];
-      }
-    });
-  
-    Object.keys(data1).forEach((key) => {
-      if (!has(data2, key)) {
-        result[`- ${key}`] = data1[key];
-      }
-    });
-  
-    return result;
-  };
-  
-  export default diff;
+          if (has(obj2, key)) {
+            acc[`+ ${key}`] = obj2[key]
+          }
+        }    
+        return acc;
+      }, {})
+
+    return diffFunc
+};
+
+export default getDiff;
