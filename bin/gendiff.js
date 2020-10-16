@@ -3,7 +3,6 @@
 import commander from 'commander';
 import diff from '../src/index.js';
 
-
 const program = new commander.Command();
 
 program
