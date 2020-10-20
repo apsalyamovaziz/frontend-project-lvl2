@@ -2,4 +2,4 @@
 
 [![Node CI](https://github.com/apsalyamovaziz/frontend-project-lvl2/workflows/Node%20CI/badge.svg)](https://github.com/apsalyamovaziz/frontend-project-lvl2/actions)
 
-https://asciinema.org/a/51QOG0qqcvmrCLt8S4veud5El
+[![asciicast](https://asciinema.org/a/51QOG0qqcvmrCLt8S4veud5El.svg)](https://asciinema.org/a/51QOG0qqcvmrCLt8S4veud5El)
