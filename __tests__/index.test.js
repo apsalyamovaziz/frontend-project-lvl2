@@ -12,7 +12,7 @@ const __dirname = dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
-test('testt', () => {
+test('test_json', () => {
   const filePath1 = getFixturePath('file1.json');
   const filePath2 = getFixturePath('file2.json');
   const result = gendiff(filePath1, filePath2);
@@ -27,3 +27,20 @@ test('testt', () => {
 
   expect(result).toEqual(expectedResult);
 });
+
+
+// test('test_yml', () => {
+//   const filePath1 = getFixturePath('file1.yml');
+//   const filePath2 = getFixturePath('file2.yml');
+//   const result = gendiff(filePath1, filePath2);
+//   const expectedResult = `{
+//     - follow: false
+//       host: hexlet.io
+//     - proxy: 123.234.53.22
+//     - timeout: 50
+//     + timeout: 20
+//     + verbose: true
+//   }`;
+
+//   expect(result).toEqual(expectedResult);
+// });
