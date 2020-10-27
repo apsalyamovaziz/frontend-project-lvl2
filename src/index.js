@@ -1,17 +1,9 @@
-import fs from 'fs';
 import _ from 'lodash';
-import path from 'path';
-import parser from '../src/parsers.js'
-
-const getFixturePath = (file) => path.resolve(process.cwd(), file);
+import parse from './parsers.js';
 
 const genDiff = (filename1, filename2) => {
-  const filePath1 = getFixturePath(filename1);
-  const filePath2 = getFixturePath(filename2);
-  /* cosnole.log(filePath1) */
-  /* cosnole.log(filename2) */
-  const file1 = parser(fs.readFileSync(filePath1, { encoding: 'utf-8' }));
-  const file2 = parser(fs.readFileSync(filePath2, { encoding: 'utf-8' }));
+  const file1 = parse(filename1);
+  const file2 = parse(filename2);
   const keys1 = _.keys(file1);
   const keys2 = _.keys(file2);
   const keys = _.union(keys1, keys2).sort();
@@ -34,7 +26,5 @@ const genDiff = (filename1, filename2) => {
   result.push('  }');
   return result.join('');
 };
-
-/* console.log('test console.log') */
 
 export default genDiff;

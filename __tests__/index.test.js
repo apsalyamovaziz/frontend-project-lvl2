@@ -28,19 +28,18 @@ test('test_json', () => {
   expect(result).toEqual(expectedResult);
 });
 
+test('test_yml', () => {
+  const filePath1 = getFixturePath('file1.yml');
+  const filePath2 = getFixturePath('file2.yml');
+  const result = gendiff(filePath1, filePath2);
+  const expectedResult = `{
+    - follow: false
+      host: hexlet.io
+    - proxy: 123.234.53.22
+    - timeout: 50
+    + timeout: 20
+    + verbose: true
+  }`;
 
-// test('test_yml', () => {
-//   const filePath1 = getFixturePath('file1.yml');
-//   const filePath2 = getFixturePath('file2.yml');
-//   const result = gendiff(filePath1, filePath2);
-//   const expectedResult = `{
-//     - follow: false
-//       host: hexlet.io
-//     - proxy: 123.234.53.22
-//     - timeout: 50
-//     + timeout: 20
-//     + verbose: true
-//   }`;
-
-//   expect(result).toEqual(expectedResult);
-// });
+  expect(result).toEqual(expectedResult);
+});
